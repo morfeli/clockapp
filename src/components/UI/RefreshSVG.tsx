@@ -10,7 +10,7 @@ export const RefreshSVG = () => {
   return (
     <svg
       onClick={fetchQuoteHandler}
-      className="absolute bg-white rounded-lg right-5 lg:right-10"
+      className="absolute bg-white rounded-lg cursor-pointer right-5 lg:right-10"
       xmlns="http://www.w3.org/2000/svg"
       x="0px"
       y="0px"
