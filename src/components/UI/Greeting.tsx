@@ -14,6 +14,8 @@ export const Greeting = (props: Props) => {
   const region = timeCtx.geoData[0]?.region_code;
   const country = timeCtx.geoData[0]?.country;
 
+  console.log(abbr);
+
   const timeNow = moment(geoDataTime).format("LT");
   const currentTime = parseInt(moment(geoDataTime).format("HH"));
 
