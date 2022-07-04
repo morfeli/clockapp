@@ -76,11 +76,6 @@ export const TimeProvider = (props: TimeProviderProps) => {
   useEffect(() => {
     fetchQuotes();
     fetchGeoData();
-    const interval = setInterval(() => {
-      fetchGeoData();
-    }, 6000);
-
-    return () => clearInterval(interval);
   }, [fetchQuotes]);
 
   useEffect(() => {
