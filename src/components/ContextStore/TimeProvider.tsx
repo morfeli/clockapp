@@ -82,7 +82,7 @@ export const TimeProvider = (props: TimeProviderProps) => {
     fetchGeoData();
     const interval = setInterval(() => {
       fetchGeoData();
-    }, 6000);
+    }, 60000);
 
     return () => clearInterval(interval);
   }, []);
