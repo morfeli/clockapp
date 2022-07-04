@@ -48,7 +48,7 @@ export const Greeting = (props: Props) => {
           {timeNow} <span className="text-base">{abbr}</span>
         </p>
 
-        <p className="pt-6">
+        <p className="pt-6 text-lg md:text-2xl">
           In {city}, {region}, {country}
         </p>
       </div>
