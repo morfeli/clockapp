@@ -1,24 +1,42 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { useState, useEffect } from "react";
+
+import { TimeProvider } from "./components/ContextStore/TimeProvider";
+import { WrapperImage } from "./components/WrapperImage/WrapperImage";
+import { Quotes } from "./components/UI/Quotes";
+import { Greeting } from "./components/UI/Greeting";
+import { ExpandedDetails } from "./components/UI/ExpandedDetails";
+import { ToggleBtn } from "./components/UI/ToggleBtn";
+
+export interface isMobile {
+  innerWidth: number;
+  isMobile: boolean;
+}
 
 function App() {
+  const [innerWidth, setInnerWidth] = useState<number>(0);
+
+  const isMobile = innerWidth <= 767;
+  const changeWidth = (): void => setInnerWidth(window.innerWidth);
+
+  useEffect(() => {
+    changeWidth();
+
+    window.addEventListener("resize", changeWidth);
+
+    return () => {
+      window.removeEventListener("resize", changeWidth);
+    };
+  }, [isMobile]);
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <TimeProvider>
+        <WrapperImage>
+          <Quotes />
+          <Greeting innerWidth={innerWidth} isMobile={isMobile} />
+          <ToggleBtn />
+          <ExpandedDetails />
+        </WrapperImage>
+      </TimeProvider>
     </div>
   );
 }
