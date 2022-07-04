@@ -24,7 +24,7 @@ export const Quotes = (): JSX.Element => {
         quotesArr.map((item, i) => {
           return (
             <div key={item._id} className="font-bold text-white">
-              <p className="pr-10 text-lg md:text-2xl lg:text-3xl">
+              <p className="pr-10 text-lg md:text-2xl lg:text-3xl lg:pr-14">
                 {item.content}
               </p>
               <h1 className="pt-2">-{item.author}</h1>
