@@ -15,7 +15,8 @@ type ITimeContext = {
   geoData: GeoData;
   timeNow: number;
   error: boolean;
-  loaded: boolean;
+  geoLoaded: boolean;
+  quotesLoaded: boolean;
   active: boolean;
   toggleActive?: () => void;
   fetchNewQuote?: () => void;
@@ -30,7 +31,8 @@ const defaultState = {
   geoData: [],
   timeNow: 0,
   error: false,
-  loaded: false,
+  geoLoaded: false,
+  quotesLoaded: false,
   active: false,
 };
 
@@ -40,18 +42,20 @@ export const TimeProvider = (props: TimeProviderProps) => {
   const [quotes, setQuotes] = useState<any[]>(defaultState.quotes);
   const [geoData, setGeoData] = useState<any[]>(defaultState.geoData);
   const [error, setError] = useState(defaultState.error);
-  const [loaded, setLoaded] = useState(defaultState.loaded);
+  const [geoLoaded, setGeoLoaded] = useState(defaultState.geoLoaded);
+  const [quotesLoaded, setQuotesLoaded] = useState(defaultState.quotesLoaded);
+
   const [active, setActive] = useState(defaultState.active);
   const [timeNow, setTimeNow] = useState<number>(defaultState.timeNow);
 
   const fetchQuotes = () => {
-    setLoaded(true);
+    setQuotesLoaded(true);
 
     fetch("https://api.quotable.io/random?tags=technology,famous-quotes")
       .then((res) => res.json())
       .then((data) => {
         if (data) {
-          setLoaded(false);
+          setQuotesLoaded(false);
           setQuotes([data]);
         }
       })
@@ -59,13 +63,13 @@ export const TimeProvider = (props: TimeProviderProps) => {
   };
 
   const fetchGeoData = () => {
-    setLoaded(true);
+    setGeoLoaded(true);
 
     fetch("https://ipwho.is/")
       .then((res) => res.json())
       .then((data) => {
         if (data) {
-          setLoaded(false);
+          setGeoLoaded(false);
           setGeoData([data]);
         }
       })
@@ -103,7 +107,8 @@ export const TimeProvider = (props: TimeProviderProps) => {
       geoData,
       error,
       active,
-      loaded,
+      geoLoaded,
+      quotesLoaded,
       toggleActive,
       fetchNewQuote,
       timeNow,
@@ -112,7 +117,8 @@ export const TimeProvider = (props: TimeProviderProps) => {
       quotes,
       error,
       active,
-      loaded,
+      geoLoaded,
+      quotesLoaded,
       toggleActive,
       fetchNewQuote,
       geoData,

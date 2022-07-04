@@ -13,7 +13,7 @@ export const ToggleBtn = () => {
   return (
     <button
       onClick={showExpandedDetails}
-      className="flex items-center self-end w-24 h-12 mr-8 text-sm font-bold text-black bg-white rounded-full justify-evenly"
+      className="flex items-center self-end w-24 h-12 mb-4 mr-8 text-sm font-bold text-black bg-white rounded-full justify-evenly"
     >
       {active ? <p className="w-10">LESS</p> : <p className="w-10">MORE</p>}{" "}
       <IconArrowSVG />

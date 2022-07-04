@@ -6,11 +6,16 @@ import { RefreshSVG } from "./RefreshSVG";
 export const Quotes = (): JSX.Element => {
   const timeCtx = useContext(TimeContext);
   const quotesArr = timeCtx.quotes;
+  const isLoading = timeCtx.quotesLoaded;
 
   const quotesVariants = {
     initial: { opacity: 1, y: 0 },
     animate: { opacity: 0, y: -100 },
   };
+
+  if (isLoading) {
+    return <h1>Loading...</h1>;
+  }
 
   return (
     <motion.section
