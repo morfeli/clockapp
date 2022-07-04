@@ -61,7 +61,7 @@ export const TimeProvider = (props: TimeProviderProps) => {
   const fetchGeoData = () => {
     setLoaded(true);
 
-    fetch("http://ipwho.is/")
+    fetch("https://ipwho.is/")
       .then((res) => res.json())
       .then((data) => {
         if (data) {
