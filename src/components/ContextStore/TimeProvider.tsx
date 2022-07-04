@@ -44,7 +44,7 @@ export const TimeProvider = (props: TimeProviderProps) => {
   const [active, setActive] = useState(defaultState.active);
   const [timeNow, setTimeNow] = useState<number>(defaultState.timeNow);
 
-  const fetchQuotes = useCallback(() => {
+  const fetchQuotes = () => {
     setLoaded(true);
 
     fetch("https://api.quotable.io/random?tags=technology,famous-quotes")
@@ -56,7 +56,7 @@ export const TimeProvider = (props: TimeProviderProps) => {
         }
       })
       .catch((error) => setError(error));
-  }, []);
+  };
 
   const fetchGeoData = () => {
     setLoaded(true);
@@ -76,7 +76,12 @@ export const TimeProvider = (props: TimeProviderProps) => {
   useEffect(() => {
     fetchQuotes();
     fetchGeoData();
-  }, [fetchQuotes]);
+    const interval = setInterval(() => {
+      fetchGeoData();
+    }, 6000);
+
+    return () => clearInterval(interval);
+  }, []);
 
   useEffect(() => {
     const date = new Date();
@@ -88,9 +93,9 @@ export const TimeProvider = (props: TimeProviderProps) => {
     setActive((current) => !current);
   }, []);
 
-  // const fetchNewQuote = (): void => {
-  //   fetchQuotes();
-  // };
+  const fetchNewQuote = (): void => {
+    fetchQuotes();
+  };
 
   const initialState = useMemo(
     () => ({
@@ -100,10 +105,19 @@ export const TimeProvider = (props: TimeProviderProps) => {
       active,
       loaded,
       toggleActive,
-      fetchQuotes,
+      fetchNewQuote,
       timeNow,
     }),
-    [quotes, error, active, loaded, toggleActive, fetchQuotes, geoData, timeNow]
+    [
+      quotes,
+      error,
+      active,
+      loaded,
+      toggleActive,
+      fetchNewQuote,
+      geoData,
+      timeNow,
+    ]
   );
 
   return (
