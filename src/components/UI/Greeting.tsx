@@ -7,7 +7,6 @@ import moment from "moment";
 export const Greeting = (props: Props) => {
   const [message, setMessage] = useState<string>("");
   const timeCtx = useTimeCtx();
-  const isLoading = timeCtx.geoLoaded;
   const geoDataTime = timeCtx.geoData[0]?.timezone.current_time;
   const abbr = timeCtx.geoData[0]?.timezone.abbr;
   const city = timeCtx.geoData[0]?.city;
@@ -31,10 +30,6 @@ export const Greeting = (props: Props) => {
       setMessage("GOOD NIGHT");
     }
   }, [currentTime]);
-
-  if (isLoading) {
-    return <h1>Loading...</h1>;
-  }
 
   return (
     <div className="flex flex-col items-center pt-24 text-4xl tracking-wide text-center text-white sm:text-4xl md:text-4xl">
